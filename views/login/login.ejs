@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
+
+
+    <title>Login</title>
+    <link rel="stylesheet" href="./login.css">
+</head>
+
+<body>
+
+    <div class="main" style="margin-top: 100px;" id="main_form">
+        <div class="card  m-auto shadow-lg" id="form" >
+
+            <div class="card-header p-2 text-light" style="background-color: #1abc9c;">
+                
+
+
+                <h3 class="float-start">Login here</h3>
+                <i class="fa fa-sign-in float-end mt-2 mx-2 fs-4" aria-hidden="true"></i>
+            </div>
+
+            <div class="card-body" style="background-color: #FFFFFF;">
+ <div>
+     <div class="row">
+        <div class="col-6" >
+            <button id="user-from-show-button" style="border: 1px solid gray; background-color: gray;" class="w-100 text-light" onclick="login_type('user')">User</button>
+         </div>
+         <div class="col-6" >
+           <button  id="admin-from-show-button"  style=" border: 1px solid gray; background-color: gray;" class="w-100 text-light"   onclick="login_type('admin')">Admin</button>
+        </div>
+     </div>
+
+ </div >
+
+
+ 
+ <div style="height: 50px;margin-top: 5px;">
+    <% if (messages.length>0) { %>
+        <div class="alert alert-primary " style="height: 45px;" role="alert">
+          <div >
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>   <%= messages%>
+          </div>
+         
+        </div>
+        
+    
+        
+    
+    
+     <% } else { %>
+      
+     <% } %>
+  
+ </div>
+  
+
+ 
+
+ 
+
+<!-- USER LOGIN FORM -->
+            <div  id="user_login_form">
+                <form action="/api/userLogin/login" method="POST" >
+                  
+                   <label for="email">Email</label>
+                   <input 
+                   id="user_email"
+                    name="email"
+                    type="email" 
+                    class="form-control"
+                    placeholder="Enter email"
+                    required
+                     >
+
+                  
+                   <label for="password">Password</label>
+                   <input 
+                   id="user_password"
+                   name="password"
+                   type="password" 
+                   class="form-control" 
+                   placeholder="Enter password"
+                   required
+                   >
+
+                   <button type="submit" class="btn btn-success mt-3">Login</button>
+
+
+                </form>
+
+            </div>
+
+
+              <!-- //ADMIN LOGIN FORM -->
+               <div id="admin_login_form">
+              
+                <form action="/api/admin/login" method="POST">
+                    
+                  
+                 <label for="email">Email</label>
+                 <input 
+                  id="admin_email"
+                  name="email"
+                  type="email" 
+                  class="form-control"
+                  placeholder="Enter email"
+                  required
+                   >
+
+                
+                 <label for="password">Password</label>
+                 <input 
+                 id="admin_password"
+                 name="password"
+                 type="password" 
+                 class="form-control" 
+                 placeholder="Enter password"
+                 required
+                 >
+
+                  
+                 <button type="submit" class="btn btn-success mt-3">Login</button>
+
+              </form>
+
+              <!-- <button onclick="admin_login_submit()" class="btn btn-success mt-3">Login</button> -->
+
+               </div>
+
+
+            </div>
+
+
+   
+
+
+
+
+
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="./login.js"></script>
+</body>
+
+</html>

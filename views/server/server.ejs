@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
+  <link rel="stylesheet" href="./admin_panel.css" />
+  <link rel="stylesheet" href="./server.css" />
+  <link rel="stylesheet" href="./vtoast.css" />
+</head>
+
+<body>
+  <!-- FOR WEB -->
+  <div class="sidebar shadow-lg" style="background-color: #ffffff">
+    <a id="home_menu" href="/adminPanel" class="text-dark"><i class="fa fa-server mx-2" aria-hidden="true"></i> Home</a>
+
+    <a id="server_menu" href="/server" class="text-dark"><i class="fa fa-server mx-2" aria-hidden="true"></i> Server</a>
+    <a id="payload_menu" href="/payload" class="text-dark"><i class="fa fa-street-view mx-2" aria-hidden="true"></i>
+      Payload</a>
+
+    <a id="config_menu" href="/config" class="text-dark"><i class="fa fa-cogs mx-2" aria-hidden="true"></i> Config</a>
+  </div>
+
+  <!-- FOR MOBILE -->
+  <div class="sidebar shadow-lg" id="sidebar">
+    <a href="/adminPanel" class="text-white"><i class="fa fa-server mx-2" aria-hidden="true"></i> Home</a>
+
+    <a id="server_menu_ml" href="/server" class="text-white"><i class="fa fa-server mx-2" aria-hidden="true"></i>
+      Server</a>
+    <a id="payload_menu_ml" href="/payload" class="text-white"><i class="fa fa-street-view mx-2" aria-hidden="true"></i>
+      Payload</a>
+   
+    <a id="config_menu_ml" href="/config" class="text-white"><i class="fa fa-cogs mx-2" aria-hidden="true"></i>
+      Config</a>
+
+    <form action="/logout" class="mx-4 mt-4">
+      <button type="submit" style="background-color: #3498db; border: 0; color: white">
+        <i class="fa fa-sign-out mx-1" aria-hidden="true"></i>Logout
+      </button>
+    </form>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="main-content">
+        <div class="header shadow-lg rounded">
+          <div class="header-left">
+            <h4>Admin Panel</h4>
+          </div>
+
+          <div class="header-right">
+            <form action="/logout" class="logout">
+              <button type="submit" style="background-color: #3498db; border: 0; color: white">
+                <i class="fa fa-sign-out mx-1" aria-hidden="true"></i>Logout
+              </button>
+            </form>
+            <!-- <div class="logout">
+          <a href="#"></i>Logout</a>
+        </div> -->
+
+            <div class="menu" onclick="showSidebar()">
+              <i class="fa fa-bars" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mt-4 shadow-lg">
+          <div class="card-header">
+            <h5 class="float-start">Server</h5>
+            <button type="button" class="float-end btn btn-info text-light" data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop">
+              <i class="fa fa-plus text-light mx-1" aria-hidden="true"></i>Add
+              New
+            </button>
+          </div>
+          <div class="card-body" id="card-body">
+            <table class="table table-bordered table-hover server-table table-responsive">
+              <thead>
+                <tr style="font-size: 14px">
+                  <th scope="col">Sl</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Server Ip</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Proxy Port</th>
+                  <th scope="col">Vpn Port</th>
+                  <th scope="col">Ssl Port</th>
+                  <th scope="col">Flag</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody id="server_table"></tbody>
+            </table>
+          </div>
+
+          <div class="card-footer">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination" id="server_table_pagination"></ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- CREATE SERVER MODAL -->
+  <div class="row">
+    <div>
+      <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content w-75" id="modal_dismiss">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">
+                Create New Server
+              </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="create_server_form">
+                <label for="serverName">Server Name</label>
+                <input value="SERVER-" name="name" type="text" id="serverName" placeholder="Server name"
+                  class="form-control mb-1" />
+
+                <label for="ip">Server Ip</label>
+                <input name="serverIp" type="text" id="ip" placeholder="Server ip" class="form-control mb-1" />
+
+                <label for="type">Type</label>
+                <select class="form-select form-select-md mb-3" id="type" aria-label=".form-select-lg example">
+                  <option value="Open Vpn">Open Vpn</option>
+                  <option value="Ssl Vpn">Ssl Vpn</option>
+                </select>
+
+                <label for="pport">Proxy Port</label>
+                <input name="80" type="text" id="pport" placeholder="Proxy port" class="form-control mb-1" />
+
+                <label for="vport">Vpn Port</label>
+                <input value="1194" name="vpnPort" type="text" id="vport" placeholder="Vpn Port"
+                  class="form-control mb-1" />
+                <label for="sport">SSL Port</label>
+                <input value="443" name="sslPort" type="text" id="sport" placeholder="SSL port"
+                  class="form-control mb-1" />
+
+                <label for="type">Flag</label>
+                <select class="form-select form-select-md mb-3" id="flag" aria-label=".form-select-lg example">
+
+                  <option value="ALL">All</option>
+                  <option value="BD">Bangladesh</option>
+                  <option value="DE">Germany</option>
+                  <option value="FR">France</option>
+                  <option value="GB">Great Britain</option>
+                  <option value="UK">England</option>
+                  <option value="NL">Netherland</option>
+                  <option value="SG">Singapore</option>
+
+
+                </select>
+              </form>
+              <button onclick="create_server()" type="button" class="btn btn-primary">
+                Create
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- UPDATE SERVER MODAL -->
+
+  <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content p-3">
+        <div class="modal-header mb-3">
+          <h5 class="modal-title" id="exampleModalLabel">Update Server</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div id="update_server"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../login/login.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <script src="./create_server.js"></script>
+  <script src="./admin_panel.js"></script>
+  <script src="./server.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

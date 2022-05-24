@@ -1,0 +1,32 @@
+{
+  "name": "task-8may",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "connect-flash": "^0.1.1",
+    "connect-livereload": "^0.6.1",
+    "cookie-parser": "^1.4.6",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.7",
+    "express": "^4.18.1",
+    "express-flash-message": "^2.1.0",
+    "express-session": "^1.17.3",
+    "express-toastr": "^2.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "livereload": "^0.9.3",
+    "mongoose": "^6.3.2",
+    "nodemon": "^2.0.16",
+    "xxtea": "^0.2.3",
+    "xxtea-node": "^1.1.4"
+  }
+}

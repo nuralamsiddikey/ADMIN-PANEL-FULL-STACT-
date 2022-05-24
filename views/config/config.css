@@ -1,0 +1,25 @@
+
+.position{
+    top: 15px;
+    margin: 0 auto;
+    left: 37%;
+   
+}
+
+
+
+
+
+@media screen and (max-width: 600px) {
+    #encrypted-data-show-modal{
+        margin: auto;
+    }
+   
+  }
+  @media screen and (max-width: 400px) {
+    #encrypted-data-show-modal{
+        margin: auto;
+        width: 80% !important;
+    }
+   
+  }

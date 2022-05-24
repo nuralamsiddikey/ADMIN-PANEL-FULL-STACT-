@@ -1,0 +1,19 @@
+body{
+  background-color: #E2E2E5;
+}
+
+
+
+/* RESPONSIVE FORM */
+
+#form{
+  width: 300px;
+}
+
+@media only screen and (max-width: 770px) {
+  
+  #form{
+    width: 300px;
+  }
+}
+

@@ -1,0 +1,10 @@
+.table>:not(:first-child) {
+    border-top: none !important;
+}
+
+@media only screen and (max-width: 600px) {
+   #user-create-modal{
+ 
+
+   }
+  }

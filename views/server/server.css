@@ -1,0 +1,18 @@
+.table>:not(:first-child) {
+    border-top: none !important;
+}
+
+
+@media only screen and (max-width: 500px) {
+ .w-75 {
+    width: 120% !important; 
+} 
+
+  }
+
+  @media only screen and (max-width: 350px) {
+    .w-75 {
+       width: 150% !important; 
+   } 
+   
+     }
